@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:women_safety/child/bottom_page.dart';
 import 'package:women_safety/child/register_child.dart';
 import 'package:women_safety/home_screen.dart';
 import '../controller/auth_controller.dart';
@@ -44,7 +45,7 @@ class _ChildLoginScreenState extends State<ChildLoginScreen> {
       if (user != null) {
         await MySharedPrefference.saveUserType(user.type!);
         if (user.type == "child") {
-          goTo(context, HomeScreen());
+          goTo(context, BottomPage());
         } else if (user.type == "parent") {
           goTo(context, ParentHomeScreen());
         } else {

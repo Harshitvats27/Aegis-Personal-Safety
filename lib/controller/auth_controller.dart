@@ -93,6 +93,7 @@ class AuthController {
     required String name,
     required String phone,
     required String email,
+    required String childEmail,
     required String password,
   }) async {
 
@@ -107,7 +108,7 @@ class AuthController {
       name: name,
       phone: phone,
       guardianEmail: email,
-      childEmail: "",
+      childEmail: childEmail,
       type: "parent",
     );
 

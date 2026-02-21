@@ -39,6 +39,7 @@ class _RegisterParentScreenState
         name: _formData['name']!,
         phone: _formData['phone']!,
         email: _formData['email']!,
+          childEmail: _formData['childEmail']!,
         password: _formData['password']!,
       );
 
@@ -97,6 +98,12 @@ class _RegisterParentScreenState
                 hintText: "Enter Email",
                 keyboardtype: TextInputType.emailAddress,
                 onsave: (v) => _formData['email'] = v!,
+                validate: (v) => UValidator.validateEmail(v),
+              ),
+              CustomTextField(
+                hintText: "Enter Child Email",
+                keyboardtype: TextInputType.emailAddress,
+                onsave: (v) => _formData['childEmail'] = v!,
                 validate: (v) => UValidator.validateEmail(v),
               ),
 

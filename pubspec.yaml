@@ -28,13 +28,22 @@ dependencies:
   geolocator: ^10.1.0
   geocoding: ^2.1.1
   font_awesome_flutter: ^10.7.0
+  image_picker: ^1.2.1
+  firebase_storage: ^12.4.10
+  cached_network_image: ^3.4.1
+  flutter_rating_bar: ^4.0.1
+  shake: ^2.2.0
 
 dev_dependencies:
-  flutter_test:
+ flutter_test:
     sdk: flutter
 
 
-  flutter_lints: ^5.0.0
+ flutter_lints: ^5.0.0
+
+dependency_overrides:
+  sensors_plus: ^5.0.1
+
 
 flutter:
 

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:women_safety/child/bottom_screens/chat_page.dart';
+import 'package:women_safety/child/bottom_screens/profile_page.dart';
+import 'package:women_safety/child/bottom_screens/review_page.dart';
 import 'package:women_safety/parent/parent_home_screen.dart';
 import '../home_screen.dart';
 import '../widgets/components/fab_bar_bottom.dart';
@@ -23,9 +26,11 @@ class _BottomPageState extends State<BottomPage> {
     // // CheckUserStatusBeforeChatOnProfile(),
     // SettingsPage()
     // // ReviewPage(),,
-    ParentHomeScreen(),
-    ParentHomeScreen(),
-    ParentHomeScreen(),
+
+    ChatPage(),
+    ReviewPage(),
+    ProfilePage(),
+
   ];
   onTapped(int index) {
     setState(() {

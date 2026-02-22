@@ -127,16 +127,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    _shakeDetector = ShakeDetector.autoStart(
-      onPhoneShake: () async {
-        if (!mounted) return;
-        await triggerSOS();
-      },
-      shakeThresholdGravity: 5,
-      shakeSlopTimeMS: 500,
-      shakeCountResetTime: 3000,
-      minimumShakeCount: 1,
-    );
   }
 
   @override
@@ -159,58 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Future<void> triggerSOS() async {
-    try {
-      await Permission.location.request();
-      await Permission.phone.request();
 
-      Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-      );
-
-      String locationLink =
-          "https://maps.google.com/?q=${position.latitude},${position.longitude}";
-
-      String message =
-          "🚨 EMERGENCY!\nI need help.\nMy Live Location:\n$locationLink";
-
-      HapticFeedback.heavyImpact();
-
-      List<TContact> contactList =
-      await DatabaseHelper().getContactList();
-
-      if (contactList.isEmpty) {
-        Fluttertoast.showToast(msg: "No emergency contacts found");
-        return;
-      }
-
-      // 📞 Step 1: Call everyone one by one
-      for (var contact in contactList) {
-        await FlutterPhoneDirectCaller.callNumber(contact.number);
-
-        // wait 25 sec before next call
-        await Future.delayed(const Duration(seconds: 25));
-      }
-
-      // 📩 Step 2: After all call attempts → Send SMS
-      String allNumbers =
-      contactList.map((c) => c.number).join(',');
-
-      final Uri smsUri = Uri(
-        scheme: 'sms',
-        path: allNumbers,
-        queryParameters: {'body': message},
-      );
-
-      await launchUrl(smsUri);
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("🚨 Calls Attempted & SMS Sent")),
-      );
-    } catch (e) {
-      print(e);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -40,6 +40,8 @@ dev_dependencies:
 
 
  flutter_lints: ^5.0.0
+ flutter_native_splash: ^2.4.7
+ flutter_launcher_icons: ^0.13.1
 
 dependency_overrides:
   sensors_plus: ^5.0.1
@@ -51,3 +53,27 @@ flutter:
 
   assets:
     - assets/
+flutter_launcher_icons:
+  android: true
+  ios: true
+  android_round: true
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_background_dark: "#000000"
+  adaptive_icon_foreground: "assets/women_safety_logo.png"
+  adaptive_icon_foreground_dark: "assets/women_safety_logo.png"
+  image_path_android: "assets/women_safety_logo.png"
+  image_path_ios: "assets/women_safety_logo.png"
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  color_dark: "#000000"
+  image_dark: assets/black_app_logo.png
+  image: assets/white_app_logo.png
+
+  android_12:
+    color: "#FFFFFF"
+    color_dark: "#000000"
+    image_dark: assets/black_app_logo.png
+    image: assets/white_app_logo.png
+
+  web: false

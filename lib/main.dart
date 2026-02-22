@@ -1,18 +1,32 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shake/shake.dart';
 import 'package:women_safety/child/bottom_page.dart';
 import 'package:women_safety/child/bottom_screens/child_home_page.dart';
 import 'package:women_safety/home_screen.dart';
 import 'package:women_safety/parent/parent_home_screen.dart';
+import 'package:women_safety/services/SOSService.dart';
 import 'package:women_safety/services/flutter_background_services.dart';
 
 import 'child/child_login_screen.dart';
 import 'db/share_pref.dart';
 import 'firebase_options.dart';
+late ShakeDetector _globalShakeDetector;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  _globalShakeDetector = ShakeDetector.autoStart(
+    onPhoneShake: () async {
+      print("Global Shake Detected");
+      // Yaha apna SOS function call karo
+      SOSService.triggerSOS();
+    },
+    shakeThresholdGravity: 5,
+    shakeSlopTimeMS: 500,
+    shakeCountResetTime: 3000,
+    minimumShakeCount: 2,
+  );
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

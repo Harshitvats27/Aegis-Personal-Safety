@@ -1,16 +1,14 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:women_safety/child/bottom_screens/chat_page.dart';
-import 'package:women_safety/child/bottom_screens/profile_page.dart';
-import 'package:women_safety/child/bottom_screens/review_page.dart';
-import 'package:women_safety/parent/parent_home_screen.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+ // 🔥 Path sahi kiya (Check if it matches your project structure)
 import '../home_screen.dart';
-import '../widgets/components/fab_bar_bottom.dart';
 import 'bottom_screens/add_contacts.dart';
-import 'bottom_screens/contacts_page.dart';
+import 'bottom_screens/profile_page.dart'; // 🔥 Yeh file ek baar project directory me re-check kar lena laadle
 
 class BottomPage extends StatefulWidget {
-  BottomPage({Key? key}) : super(key: key);
+  const BottomPage({super.key});
 
   @override
   State<BottomPage> createState() => _BottomPageState();
@@ -18,51 +16,57 @@ class BottomPage extends StatefulWidget {
 
 class _BottomPageState extends State<BottomPage> {
   int currentIndex = 0;
-  List<Widget> pages = [
-    HomeScreen(),
-   AddContactsPage(),
-    // CheckUserStatusBeforeChat(),
-    // ReviewPage(),
-    // // CheckUserStatusBeforeChatOnProfile(),
-    // SettingsPage()
-    // // ReviewPage(),,
+  final GlobalKey<CurvedNavigationBarState> _navBarKey = GlobalKey();
 
-    ChatPage(),
-    ReviewPage(),
-    ProfilePage(),
-
+  // Pages list matching items length (Strictly checked to be 3)
+  final List<Widget> pages = [
+    const HomeScreen(),
+    const AddContactsPage(),
+    const ProfilePage(),
   ];
-  onTapped(int index) {
-    setState(() {
-      currentIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: () async {
-          SystemNavigator.pop();
-          return true;
-        },
-        child: DefaultTabController(
-          initialIndex: currentIndex,
-          length: pages.length,
-          child: Scaffold(
-              body: pages[currentIndex],
-              bottomNavigationBar: FABBottomAppBar(
-                onTabSelected: onTapped,
-                items: [
-                  FABBottomAppBarItem(iconData: Icons.home, text: "home"),
-                  FABBottomAppBarItem(
-                      iconData: Icons.contacts, text: "contacts"),
-                  FABBottomAppBarItem(iconData: Icons.chat, text: "chat"),
-                  FABBottomAppBarItem(
-                      iconData: Icons.rate_review, text: "Ratings"),
-                  FABBottomAppBarItem(
-                      iconData: Icons.settings, text: "Settings"),
-                ],
-              )),
-        ));
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        SystemNavigator.pop(); // Direct safe system kill handler
+      },
+      child: Scaffold(
+        // 🔥 FIX 1: Hardcoded Colors.grey[50] hataya taaki background light pink ya dark berry automatic ho jaye!
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
+        body: IndexedStack(
+          index: currentIndex,
+          children: pages,
+        ),
+
+        // 🔥 HIGHLY PREMIUM CURVED FLUID ANIMATED NAV BAR
+        bottomNavigationBar: CurvedNavigationBar(
+          key: _navBarKey,
+          index: currentIndex,
+          height: 60.0,
+          items: const <Widget>[
+            Icon(Icons.home_rounded, size: 28, color: Colors.white),
+            Icon(Icons.contacts_rounded, size: 28, color: Colors.white),
+            Icon(Icons.person_rounded, size: 28, color: Colors.white),
+          ],
+          color: Colors.pink,
+          buttonBackgroundColor: Colors.pinkAccent,
+          // 🔥 FIX 2: Dark mode me curved bar ke peeche ajeeb white patch na dikhe, isliye transparent ya scaffold color kiya
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          animationCurve: Curves.easeInOutCubic,
+          animationDuration: const Duration(milliseconds: 400),
+          onTap: (index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
+        ),
+      ),
+    );
   }
 }

@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:400960724338:android:62caf4f9442625c618d1eb",
         "android_client_info": {
-          "package_name": "com.example.women_safety"
+          "package_name": "com.harshitvats.aegis"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "400960724338-efjnt4hf9o5d9td2t9gca92h2lc0b0ll.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.women_safety",
+            "package_name": "com.harshitvats.aegis",
             "certificate_hash": "ebe793928fa36e346cb8f4ea4c831031edd2af5f"
           }
         },

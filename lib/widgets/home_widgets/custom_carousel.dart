@@ -6,7 +6,7 @@ import '../../utils/quotes.dart';
 import 'safewebview.dart';
 
 class CustomCarouel extends StatelessWidget {
-  const CustomCarouel({Key? key}) : super(key: key);
+  const CustomCarouel({super.key});
 
   void navigateToRoute(BuildContext context, Widget route) {
     Navigator.push(context, CupertinoPageRoute(builder: (context) => route));
@@ -36,25 +36,24 @@ class CustomCarouel extends StatelessWidget {
                       context,
                       SafeWebView(
                           url:
-                          "https://gulfnews.com/world/asia/pakistan/womens-day-10-pakistani-women-inspiring-the-country-1.77696239"));
+                          "https://artsandculture.google.com/project/indias-women-in-culture"));
                 } else if (index == 1) {
                   navigateToRoute(
                       context,
                       SafeWebView(
                           url:
-                          "https://plan-international.org/ending-violence/16-ways-end-violence-girls"));
+                          "https://www.mha.gov.in/en/commoncontent/crime-against-women-0"));
                 } else if (index == 2) {
                   navigateToRoute(
                       context,
                       SafeWebView(
                           url:
-                          "https://www.healthline.com/health/womens-health/self-defense-tips-escape"));
+                          "https://rrs.org.in/women-safety/"));
                 } else {
                   navigateToRoute(
                       context,
                       SafeWebView(
-                          url:
-                          "https://www.healthline.com/health/womens-health/self-defense-tips-escape"));
+                          url: "https://rrs.org.in/women-safety/"));
                 }
               },
               child: Container(

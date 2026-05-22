@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 class AmbulanceEmergency extends StatelessWidget {
+  const AmbulanceEmergency({super.key});
+
   _callNumber(String number) async {
     await FlutterPhoneDirectCaller.callNumber(number);
   }
@@ -72,7 +74,7 @@ class AmbulanceEmergency extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(
-                              '1 -1 -2 -2',
+                              '102',
                               style: TextStyle(
                                 overflow: TextOverflow.ellipsis,
                                 color: Colors.red[300],

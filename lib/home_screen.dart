@@ -1,155 +1,124 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shake/shake.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // 🔥 Import this
 import 'package:women_safety/utils/constants/sizes.dart';
 import 'package:women_safety/widgets/home_widgets/custom_appBar.dart';
 import 'package:women_safety/widgets/home_widgets/custom_carousel.dart';
 import 'package:women_safety/widgets/home_widgets/emergency.dart';
 import 'package:women_safety/widgets/home_widgets/live_safe.dart';
 import 'package:women_safety/widgets/home_widgets/safehome/SafeHome.dart';
-
 import 'db/db_services.dart';
 import 'models/contactsm.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // const HomeScreen({super.key});
   int qIndex = 0;
   Position? _curentPosition;
   String? _curentAddress;
-  LocationPermission? permission;
-
-  _getPermission() async => await [Permission.sms].request();
-
-  _isPermissionGranted() async => await Permission.sms.status.isGranted;
-
-  // _sendSms(String phoneNumber, String message, {int? simSlot}) async {
-  //   SmsStatus result = await BackgroundSms.sendMessage(
-  //       phoneNumber: phoneNumber, message: message, simSlot: 1);
-  //   if (result == SmsStatus.sent) {
-  //     print("Sent");
-  //     Fluttertoast.showToast(msg: "send");
-  //   } else {
-  //     Fluttertoast.showToast(msg: "failed");
-  //   }
-  // }
-  String _currentCity = "";
-
-  checkLocationPermission() async {
-    bool permissionGranted = await _requestLocationPermission();
-    setState(() {
-      _locationPermissionGranted = permissionGranted;
-    });
-
-    if (_locationPermissionGranted) {
-      _getCurrentCity();
-    }
-  }
-
-  void _getCurrentCity() async {
-    try {
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      List<Placemark> placemarks =
-      await placemarkFromCoordinates(position.latitude, position.longitude);
-
-      if (placemarks.isNotEmpty) {
-        Placemark placemark = placemarks[0];
-        setState(() {
-          _currentCity = placemark.locality ?? 'Unknown';
-        });
-        print(_currentCity);
-      }
-    } catch (e) {
-      print('Error getting current city: $e');
-    }
-  }
-
   bool _locationPermissionGranted = false;
-
-  Future<bool> _requestLocationPermission() async {
-    var status = await Permission.location.request();
-    return status == PermissionStatus.granted;
-  }
-
-  void _getCurrentLocation() async {
-    try {
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      print('Current Location: $position');
-      _getCurrentAddress();
-      // Handle the obtained location as needed
-    } catch (e) {
-      print('Error getting current location: $e');
-    }
-  }
-
-  String currentCity = '';
-
-  _getCurrentAddress() async {
-    try {
-      List<Placemark> placemarks = await placemarkFromCoordinates(
-          _curentPosition!.latitude, _curentPosition!.longitude);
-
-      Placemark place = placemarks[0];
-      setState(() {
-        _curentAddress =
-        "${place.locality},${place.postalCode},${place.street},";
-        print(_curentAddress);
-      });
-    } catch (e) {
-      Fluttertoast.showToast(msg: e.toString());
-    }
-  }
-
-
-  getRandomQuote() {
-    Random random = Random();
-    setState(() {
-      qIndex = random.nextInt(6);
-    });
-  }
-  late ShakeDetector _shakeDetector;
+  ShakeDetector? _shakeDetector;
 
   @override
   void initState() {
     super.initState();
+    getRandomQuote();
+    checkLocationPermission();
 
+    // 🔥 Sirf pehli baar dikhane ka logic
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      checkFirstTime();
+    });
   }
 
-  @override
-  void dispose() {
-    _shakeDetector.stopListening();
-    super.dispose();
-  }
-  getAndSendSms() async {
-    List<TContact> contactList = await DatabaseHelper().getContactList();
+  void checkFirstTime() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? isAlreadyShown = prefs.getBool('isPrivacyShown');
 
-    String messageBody =
-        "https://maps.google.com/?daddr=${_curentPosition!
-        .latitude},${_curentPosition!.longitude}";
-    if (await _isPermissionGranted()) {
-      contactList.forEach((element) {
-        // _sendSms("${element.number}", "i am in trouble $messageBody");
-      });
-    } else {
-      Fluttertoast.showToast(msg: "something wrong");
+    if (isAlreadyShown == null || isAlreadyShown == false) {
+      showProminentDisclosure(context);
     }
   }
 
+  Future<void> requestAllPermissions() async {
+    await Permission.sms.request();
+    var locationStatus = await Permission.location.request();
+    if (locationStatus.isGranted) {
+      await Permission.locationAlways.request();
+      _getCurrentLocation();
+    }
+  }
 
+  void showProminentDisclosure(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            children: [
+              Icon(Icons.security, color: Colors.blue, size: 28),
+              SizedBox(width: 10),
+              Expanded(
+                child: Text("Privacy & Safety Notice",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    maxLines: 1, overflow: TextOverflow.ellipsis),
+              ),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("Aegis collects location data to enable real-time tracking during SOS emergency alerts, even when the app is closed."),
+                SizedBox(height: 10),
+                Text("This is required to keep your guardians updated during an emergency.", style: TextStyle(fontWeight: FontWeight.bold)),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(child: Text("Deny"), onPressed: () => Navigator.of(context).pop()),
+            ElevatedButton(
+              child: Text("Agree & Grant"),
+              onPressed: () async {
+                Navigator.of(context).pop();
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setBool('isPrivacyShown', true);
+                requestAllPermissions();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  checkLocationPermission() async {
+    bool permissionGranted = await Permission.location.isGranted;
+    setState(() => _locationPermissionGranted = permissionGranted);
+  }
+
+  void _getCurrentLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      setState(() => _curentPosition = position);
+    } catch (e) { print(e); }
+  }
+
+  getRandomQuote() {
+    Random random = Random();
+    setState(() => qIndex = random.nextInt(6));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -159,30 +128,19 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(USizes.screenPadding),
           child: Column(
             children: [
-              CustomAppBar(
-                onTap: getRandomQuote,
-                quoteIndex: qIndex,
-              ),
-              SizedBox(height: USizes.spaceBtwSections,),
-              Expanded(child: ListView(
-                shrinkWrap: true,
-                children: [
-                  CustomCarouel(),
-                  SizedBox(height: USizes.spaceBtwSections,),
-                  Text('Emergency', style: TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),),
-                  SizedBox(height: USizes.spaceBtwSections,),
-                  Emergency(),
-                  SizedBox(height: USizes.spaceBtwSections,),
-                  Text('Explore LiveSafe', style: TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),),
-                  SizedBox(height: USizes.spaceBtwSections,),
-                  LiveSafe(),
-                  SizedBox(height: USizes.spaceBtwItems),
-                  SafeHome(),
-                ],
-              ))
-
+              CustomAppBar(onTap: getRandomQuote, quoteIndex: qIndex),
+              Expanded(
+                child: ListView(
+                  children: [
+                    CustomCarouel(),
+                    Text('Emergency', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    Emergency(),
+                    Text('Explore LiveSafe', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    LiveSafe(),
+                    SafeHome(),
+                  ],
+                ),
+              )
             ],
           ),
         ),

@@ -1,7 +1,5 @@
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -11,6 +9,8 @@ import '../../widgets/components/PrimaryButton.dart';
 import '../../widgets/components/custom_textfield.dart';
 
 class ReviewPage extends StatefulWidget {
+  const ReviewPage({super.key});
+
   @override
   State<ReviewPage> createState() => _ReviewPageState();
 }

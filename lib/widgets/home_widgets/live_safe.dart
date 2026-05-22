@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -10,7 +9,7 @@ import 'live_safe/PharmacyCard.dart';
 import 'live_safe/PoliceStationCard.dart';
 
 class LiveSafe extends StatelessWidget {
-  const LiveSafe({Key? key}) : super(key: key);
+  const LiveSafe({super.key});
 
   static Future<void> openMap(String location) async {
     final String encodedLocation = Uri.encodeComponent(location);
@@ -33,7 +32,7 @@ class LiveSafe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 90,
       width: MediaQuery.of(context).size.width,
       child: ListView(

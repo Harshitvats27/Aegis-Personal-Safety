@@ -9,7 +9,7 @@ class FABBottomAppBarItem {
 }
 
 class FABBottomAppBar extends StatefulWidget {
-  FABBottomAppBar({
+  FABBottomAppBar({super.key, 
     required this.items,
     this.centerItemText,
     this.height = 60.0,
@@ -48,7 +48,7 @@ class _FABBottomAppBarState extends State<FABBottomAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    Widget _buildTabItem({
+    Widget buildTabItem({
       required FABBottomAppBarItem item,
       required int index,
       required ValueChanged<int> onPressed,
@@ -77,7 +77,7 @@ class _FABBottomAppBarState extends State<FABBottomAppBar> {
     }
 
     List<Widget> items = List.generate(widget.items.length, (int index) {
-      return _buildTabItem(
+      return buildTabItem(
         item: widget.items[index],
         index: index,
         onPressed: _updateIndex,

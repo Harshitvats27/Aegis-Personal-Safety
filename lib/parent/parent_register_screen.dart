@@ -8,6 +8,8 @@ import '../widgets/components/SecondaryButton.dart';
 import '../widgets/components/custom_textfield.dart';
 
 class RegisterParentScreen extends StatefulWidget {
+  const RegisterParentScreen({super.key});
+
   @override
   State<RegisterParentScreen> createState() =>
       _RegisterParentScreenState();
@@ -17,7 +19,7 @@ class _RegisterParentScreenState
     extends State<RegisterParentScreen> {
 
   final _formKey = GlobalKey<FormState>();
-  final _formData = Map<String, String>();
+  final _formData = <String, String>{};
   final AuthController _controller = AuthController();
 
   bool isLoading = false;

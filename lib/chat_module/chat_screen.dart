@@ -68,7 +68,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasData) {
-                    if (snapshot.data!.docs.length < 1) {
+                    if (snapshot.data!.docs.isEmpty) {
                       return Center(
                         child: Text(
                           type == "parent"

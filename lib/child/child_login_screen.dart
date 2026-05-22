@@ -1,9 +1,7 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:women_safety/child/bottom_page.dart';
 import 'package:women_safety/child/register_child.dart';
-import 'package:women_safety/home_screen.dart';
 import '../controller/auth_controller.dart';
 import '../db/share_pref.dart';
 import '../parent/parent_home_screen.dart';
@@ -15,13 +13,15 @@ import '../widgets/components/SecondaryButton.dart';
 import '../widgets/components/custom_textfield.dart';
 
 class ChildLoginScreen extends StatefulWidget {
+  const ChildLoginScreen({super.key});
+
   @override
   State<ChildLoginScreen> createState() => _ChildLoginScreenState();
 }
 
 class _ChildLoginScreenState extends State<ChildLoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _formData = Map<String, String>();
+  final _formData = <String, String>{};
   final AuthController _controller = AuthController();
 
   bool isLoading = false;
@@ -109,7 +109,7 @@ class _ChildLoginScreenState extends State<ChildLoginScreen> {
                         validate: (v) =>
                             UValidator.validateEmail(v),
                       ),
-
+                      SizedBox(height: 10),
                       CustomTextField(
                         hintText: "Enter Password",
                         isPassword: isPasswordHidden,

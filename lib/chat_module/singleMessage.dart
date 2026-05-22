@@ -26,7 +26,7 @@ class SingleMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     DateTime d = DateTime.parse(date!.toDate().toString());
-    String cdate = "${d.hour}" + ":" + "${d.minute}";
+    String cdate = "${d.hour}" ":" "${d.minute}";
     return type == "text"
         ? Container(
       constraints: BoxConstraints(
@@ -73,7 +73,7 @@ class SingleMessage extends StatelessWidget {
               Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    "$cdate",
+                    cdate,
                     style: TextStyle(fontSize: 15, color: Colors.white70),
                   )),
             ],
@@ -135,7 +135,7 @@ class SingleMessage extends StatelessWidget {
               Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    "$cdate",
+                    cdate,
                     style: TextStyle(
                         fontSize: 15, color: Colors.white70),
                   )),
@@ -197,7 +197,7 @@ class SingleMessage extends StatelessWidget {
               Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    "$cdate",
+                    cdate,
                     style: TextStyle(
                         fontSize: 15, color: Colors.white70),
                   )),

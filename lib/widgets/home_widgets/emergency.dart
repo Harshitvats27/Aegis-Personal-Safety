@@ -5,11 +5,11 @@ import 'emergencies/FirebrigadeEmergency.dart';
 import 'emergencies/policeemergency.dart';
 
 class Emergency extends StatelessWidget {
-  const Emergency({Key? key}) : super(key: key);
+  const Emergency({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: 180,
       child: ListView(

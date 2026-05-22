@@ -16,8 +16,8 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffix;
   final bool readOnly;
 
-  CustomTextField(
-      {this.controller,
+  const CustomTextField(
+      {super.key, this.controller,
         this.check,
         this.enable = true,
         this.readOnly = false,
@@ -36,7 +36,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       enabled: enable == true ? true : enable,
-      maxLines: maxLines == null ? 1 : maxLines,
+      maxLines: maxLines ?? 1,
       onSaved: onsave,
       readOnly: readOnly,
       focusNode: focusNode,

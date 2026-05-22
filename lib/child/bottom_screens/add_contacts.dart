@@ -26,8 +26,8 @@ class _AddContactsPageState extends State<AddContactsPage> {
       databasehelper.getContactList();
       contactListFuture.then((value) {
         setState(() {
-          this.contactList = value;
-          this.count = value.length;
+          contactList = value;
+          count = value.length;
         });
       });
     });
@@ -52,9 +52,7 @@ class _AddContactsPageState extends State<AddContactsPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (contactList == null) {
-      contactList = [];
-    }
+    contactList ??= [];
     return SafeArea(
       child: Container(
           padding: EdgeInsets.all(12),
@@ -82,7 +80,7 @@ class _AddContactsPageState extends State<AddContactsPage> {
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
                           title: Text(contactList![index].name),
-                          trailing: Container(
+                          trailing: SizedBox(
                             width: 100,
                             child: Row(
                               children: [

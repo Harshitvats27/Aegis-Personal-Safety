@@ -7,16 +7,16 @@ import '../../models/contactsm.dart';
 import '../../utils/constants/constants.dart';
 
 class ContactsPage extends StatefulWidget {
-  const ContactsPage({Key? key}) : super(key: key);
+  const ContactsPage({super.key});
 
   @override
   State<ContactsPage> createState() => _ContactsPageState();
 }
 
 class _ContactsPageState extends State<ContactsPage> {
-  List<Contact> contacts = [];
+  List<Contact> allPhoneContacts = [];
   List<Contact> contactsFiltered = [];
-  DatabaseHelper _databaseHelper = DatabaseHelper();
+  final DatabaseHelper _databaseHelper = DatabaseHelper();
 
   TextEditingController searchController = TextEditingController();
 
@@ -29,19 +29,21 @@ class _ContactsPageState extends State<ContactsPage> {
   // 🔥 Fetch Contacts
   Future<void> fetchContacts() async {
     if (await FlutterContacts.requestPermission()) {
-      List<Contact> _contacts =
-      await FlutterContacts.getContacts(withProperties: true);
+      List<Contact> fetchedList = await FlutterContacts.getContacts(
+        withProperties: true,
+      );
 
       setState(() {
-        contacts = _contacts;
-        contactsFiltered = _contacts;
+        allPhoneContacts = fetchedList; // Global list ko data de diya
+        contactsFiltered =
+            fetchedList; // Filtered list ko bhi shuruati data diya
       });
 
       searchController.addListener(() {
         filterContact();
       });
     } else {
-      dialogueBox(context, "Permission denied");
+      Fluttertoast.showToast(msg: "Permission denied by user");
     }
   }
 
@@ -49,10 +51,13 @@ class _ContactsPageState extends State<ContactsPage> {
   void filterContact() {
     String query = searchController.text.toLowerCase();
 
-    List<Contact> filtered = contacts.where((contact) {
+    List<Contact> filtered = allPhoneContacts.where((contact) {
       final name = contact.displayName.toLowerCase();
       final phone = contact.phones.isNotEmpty
-          ? contact.phones.first.number
+          ? contact.phones.first.number.replaceAll(
+              RegExp(r'\s+'),
+              "",
+            ) // Spaces hatane ke liye
           : "";
 
       return name.contains(query) || phone.contains(query);
@@ -68,63 +73,61 @@ class _ContactsPageState extends State<ContactsPage> {
     bool isSearching = searchController.text.isNotEmpty;
 
     return Scaffold(
-      body: contacts.isEmpty
+      body: allPhoneContacts.isEmpty
           ? Center(child: CircularProgressIndicator())
           : SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: searchController,
-                decoration: InputDecoration(
-                  labelText: "Search Contact",
-                  prefixIcon: Icon(Icons.search),
-                ),
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: contactsFiltered.length,
-                itemBuilder: (context, index) {
-                  Contact contact = contactsFiltered[index];
-
-                  return ListTile(
-                    title: Text(contact.displayName),
-                    leading: contact.photo != null
-                        ? CircleAvatar(
-                      backgroundColor: kColorRed,
-                      backgroundImage:
-                      MemoryImage(contact.photo!),
-                    )
-                        : CircleAvatar(
-                      backgroundColor: kColorRed,
-                      child: Text(
-                        contact.displayName.isNotEmpty
-                            ? contact.displayName[0]
-                            : "?",
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: searchController,
+                      decoration: InputDecoration(
+                        labelText: "Search Contact",
+                        prefixIcon: Icon(Icons.search),
                       ),
                     ),
-                    onTap: () {
-                      if (contact.phones.isNotEmpty) {
-                        final phoneNum =
-                            contact.phones.first.number;
-                        final name = contact.displayName;
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: contactsFiltered.length,
+                      itemBuilder: (context, index) {
+                        Contact contact = contactsFiltered[index];
 
-                        _addContact(TContact(phoneNum, name));
-                      } else {
-                        Fluttertoast.showToast(
-                            msg:
-                            "No phone number found for this contact");
-                      }
-                    },
-                  );
-                },
+                        return ListTile(
+                          title: Text(contact.displayName),
+                          leading: contact.photo != null
+                              ? CircleAvatar(
+                                  backgroundColor: kColorRed,
+                                  backgroundImage: MemoryImage(contact.photo!),
+                                )
+                              : CircleAvatar(
+                                  backgroundColor: kColorRed,
+                                  child: Text(
+                                    contact.displayName.isNotEmpty
+                                        ? contact.displayName[0]
+                                        : "?",
+                                  ),
+                                ),
+                          onTap: () {
+                            if (contact.phones.isNotEmpty) {
+                              final phoneNum = contact.phones.first.number;
+                              final name = contact.displayName;
+
+                              _addContact(TContact(phoneNum, name));
+                            } else {
+                              Fluttertoast.showToast(
+                                msg: "No phone number found for this contact",
+                              );
+                            }
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
     );
   }
 

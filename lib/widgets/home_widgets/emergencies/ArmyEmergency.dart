@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 class ArmyEmergency extends StatelessWidget {
+  const ArmyEmergency({super.key});
+
   _callNumber(String number) async {
     await FlutterPhoneDirectCaller.callNumber(number);
   }
@@ -16,7 +18,7 @@ class ArmyEmergency extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: InkWell(
-          onTap: () => _callNumber('8299838374'),
+          onTap: () => _callNumber('112'),
           child: Container(
             height: 180,
             width: MediaQuery.of(context).size.width * 0.7,
@@ -39,7 +41,7 @@ class ArmyEmergency extends StatelessWidget {
                   CircleAvatar(
                     radius: 25,
                     backgroundColor: Colors.white.withOpacity(0.5),
-                    child: Image.asset('assets/army.png'),
+                    backgroundImage: AssetImage('assets/women_safety.jpg'),
                   ),
                   Expanded(
                     child: Column(
@@ -47,7 +49,7 @@ class ArmyEmergency extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'NACTA',
+                          'Women Emergency',
                           style: TextStyle(
                             color: Colors.white,
                             overflow: TextOverflow.ellipsis,
@@ -56,7 +58,7 @@ class ArmyEmergency extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Counter Terrorism Authority',
+                          '24/7 Pan-India SOS Helpline',
                           style: TextStyle(
                             overflow: TextOverflow.ellipsis,
                             color: Colors.white,
@@ -72,7 +74,7 @@ class ArmyEmergency extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(
-                              '1 -7 -1 -7',
+                              '112',
                               style: TextStyle(
                                 overflow: TextOverflow.ellipsis,
                                 color: Colors.red[300],

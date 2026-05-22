@@ -5,8 +5,7 @@ class SecondaryButton extends StatelessWidget {
   final Function onPressed;
 
   const SecondaryButton(
-      {Key? key, required this.title, required this.onPressed})
-      : super(key: key);
+      {super.key, required this.title, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

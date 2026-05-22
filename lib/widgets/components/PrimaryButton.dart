@@ -7,11 +7,11 @@ class PrimaryButton extends StatelessWidget {
   final Function onPressed;
   bool loading;
   PrimaryButton(
-      {required this.title, required this.onPressed, this.loading = false});
+      {super.key, required this.title, required this.onPressed, this.loading = false});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 50,
       width: double.infinity,
       child: ElevatedButton(

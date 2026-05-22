@@ -7,7 +7,7 @@ import '../controller/parent_controller.dart';
 import '../utils/constants/constants.dart';
 
 class ParentHomeScreen extends StatelessWidget {
-  ParentHomeScreen({Key? key}) : super(key: key);
+  ParentHomeScreen({super.key});
 
   final ParentController _controller = ParentController();
 

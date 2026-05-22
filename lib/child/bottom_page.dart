@@ -3,14 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:women_safety/child/bottom_screens/chat_page.dart';
 import 'package:women_safety/child/bottom_screens/profile_page.dart';
 import 'package:women_safety/child/bottom_screens/review_page.dart';
-import 'package:women_safety/parent/parent_home_screen.dart';
 import '../home_screen.dart';
 import '../widgets/components/fab_bar_bottom.dart';
 import 'bottom_screens/add_contacts.dart';
-import 'bottom_screens/contacts_page.dart';
 
 class BottomPage extends StatefulWidget {
-  BottomPage({Key? key}) : super(key: key);
+  const BottomPage({super.key});
 
   @override
   State<BottomPage> createState() => _BottomPageState();
@@ -21,12 +19,6 @@ class _BottomPageState extends State<BottomPage> {
   List<Widget> pages = [
     HomeScreen(),
    AddContactsPage(),
-    // CheckUserStatusBeforeChat(),
-    // ReviewPage(),
-    // // CheckUserStatusBeforeChatOnProfile(),
-    // SettingsPage()
-    // // ReviewPage(),,
-
     ChatPage(),
     ReviewPage(),
     ProfilePage(),

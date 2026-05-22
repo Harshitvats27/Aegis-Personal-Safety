@@ -7,6 +7,8 @@ import '../widgets/components/custom_textfield.dart';
 import 'child_login_screen.dart';
 
 class RegisterChildScreen extends StatefulWidget {
+  const RegisterChildScreen({super.key});
+
   @override
   State<RegisterChildScreen> createState() =>
       _RegisterChildScreenState();
@@ -16,7 +18,7 @@ class _RegisterChildScreenState
     extends State<RegisterChildScreen> {
 
   final _formKey = GlobalKey<FormState>();
-  final _formData = Map<String, String>();
+  final _formData = <String, String>{};
   final AuthController _controller = AuthController();
 
   bool isLoading = false;
@@ -84,28 +86,28 @@ class _RegisterChildScreenState
                 onsave: (v) => _formData['name'] = v!,
                 validate: (v) => UValidator.validateEmptyText("Name", v),
               ),
-
+              SizedBox(height: 10,),
               CustomTextField(
                 hintText: "Enter Phone",
                 keyboardtype: TextInputType.phone,
                 onsave: (v) => _formData['phone'] = v!,
                 validate: (v) => UValidator.validatePhoneNumber(v),
               ),
-
+              SizedBox(height: 10,),
               CustomTextField(
                 hintText: "Enter Email",
                 keyboardtype: TextInputType.emailAddress,
                 onsave: (v) => _formData['email'] = v!,
                 validate: (v) => UValidator.validateEmail(v),
               ),
-
+              SizedBox(height: 10,),
               CustomTextField(
                 hintText: "Enter Guardian Email",
                 keyboardtype: TextInputType.emailAddress,
                 onsave: (v) => _formData['guardianEmail'] = v!,
                 validate: (v) => UValidator.validateEmail(v),
               ),
-
+              SizedBox(height: 10,),
               CustomTextField(
                 hintText: "Enter Password",
                 isPassword: isPasswordHidden,
@@ -122,7 +124,7 @@ class _RegisterChildScreenState
                   },
                 ),
               ),
-
+              SizedBox(height: 10,),
               CustomTextField(
                 hintText: "Retype Password",
                 isPassword: isRetypeHidden,

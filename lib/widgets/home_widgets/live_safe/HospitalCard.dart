@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class HospitalCard extends StatelessWidget {
   final Function? onMapFunction;
 
-  const HospitalCard({Key? key, this.onMapFunction}) : super(key: key);
+  const HospitalCard({super.key, this.onMapFunction});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class HospitalCard extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Container(
+              child: SizedBox(
                 height: 50,
                 width: 50,
                 child: Center(

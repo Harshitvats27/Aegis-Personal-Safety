@@ -1,14 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shake/shake.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:women_safety/utils/constants/sizes.dart';
 import 'package:women_safety/widgets/home_widgets/custom_appBar.dart';
 import 'package:women_safety/widgets/home_widgets/custom_carousel.dart';
@@ -20,6 +17,8 @@ import 'db/db_services.dart';
 import 'models/contactsm.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -121,17 +120,19 @@ class _HomeScreenState extends State<HomeScreen> {
       qIndex = random.nextInt(6);
     });
   }
-  late ShakeDetector _shakeDetector;
+ ShakeDetector? _shakeDetector;
 
   @override
   void initState() {
     super.initState();
 
   }
-
   @override
   void dispose() {
-    _shakeDetector.stopListening();
+    // 🔥 Safe Check: Agar initialize hua hoga, tabhi stop hoga, koi crash nahi aayega!
+    if (_shakeDetector != null) {
+      _shakeDetector!.stopListening(); // ya .stop() jo bhi aapki library support kare
+    }
     super.dispose();
   }
   getAndSendSms() async {
@@ -141,9 +142,9 @@ class _HomeScreenState extends State<HomeScreen> {
         "https://maps.google.com/?daddr=${_curentPosition!
         .latitude},${_curentPosition!.longitude}";
     if (await _isPermissionGranted()) {
-      contactList.forEach((element) {
+      for (var element in contactList) {
         // _sendSms("${element.number}", "i am in trouble $messageBody");
-      });
+      }
     } else {
       Fluttertoast.showToast(msg: "something wrong");
     }

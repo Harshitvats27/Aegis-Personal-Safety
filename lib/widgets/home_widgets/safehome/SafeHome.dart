@@ -10,7 +10,7 @@ import '../../../db/db_services.dart';
 import '../../../models/contactsm.dart';
 
 class SafeHome extends StatefulWidget {
-  const SafeHome({Key? key}) : super(key: key);
+  const SafeHome({super.key});
 
   @override
   State<SafeHome> createState() => _SafeHomeState();
@@ -337,7 +337,7 @@ class _SafeHomeState extends State<SafeHome> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        child: Container(
+        child: SizedBox(
           height: 180,
           width: MediaQuery.of(context).size.width * 0.7,
           child: Row(

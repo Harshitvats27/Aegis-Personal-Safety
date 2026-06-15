@@ -9,16 +9,60 @@
       "client_info": {
         "mobilesdk_app_id": "1:400960724338:android:62caf4f9442625c618d1eb",
         "android_client_info": {
+          "package_name": "com.example.women_safety"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "400960724338-6gvgvrocthnph1m4k2ksqt653ngebarm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.women_safety",
+            "certificate_hash": "c476e14022aaa72ecb72b8668206160721bbe8e3"
+          }
+        },
+        {
+          "client_id": "400960724338-1oo56rjq5kgaoc5fospm93tptdel7qsv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM_Rq291NY7XXVJNtkFO0cSdrXqRIZxyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "400960724338-1oo56rjq5kgaoc5fospm93tptdel7qsv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "400960724338-pviickfa1io1ad2rgbronvvembpdkh9j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.womenSafety"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400960724338:android:e3f963372fbd70e818d1eb",
+        "android_client_info": {
           "package_name": "com.harshitvats.aegis"
         }
       },
       "oauth_client": [
         {
-          "client_id": "400960724338-efjnt4hf9o5d9td2t9gca92h2lc0b0ll.apps.googleusercontent.com",
+          "client_id": "400960724338-0hnl68b438hj5i15oh4a8v077dvkmc0u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.harshitvats.aegis",
-            "certificate_hash": "ebe793928fa36e346cb8f4ea4c831031edd2af5f"
+            "certificate_hash": "c476e14022aaa72ecb72b8668206160721bbe8e3"
           }
         },
         {

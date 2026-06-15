@@ -35,7 +35,7 @@ class SOSService {
           FlutterPhoneDirectCaller.callNumber(cleanNumber);
 
           // Agli call ke liye 5 second ka wait loop back chalega
-          await Future.delayed(const Duration(seconds: 5));
+          await Future.delayed(const Duration(seconds: 30));
         }
       });
 

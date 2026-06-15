@@ -52,7 +52,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBM_Rq291NY7XXVJNtkFO0cSdrXqRIZxyI',
-    appId: '1:400960724338:android:62caf4f9442625c618d1eb',
+    appId: '1:400960724338:android:e3f963372fbd70e818d1eb',
     messagingSenderId: '400960724338',
     projectId: 'women-safety-sos-d0cd8',
     storageBucket: 'women-safety-sos-d0cd8.firebasestorage.app',
@@ -64,6 +64,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '400960724338',
     projectId: 'women-safety-sos-d0cd8',
     storageBucket: 'women-safety-sos-d0cd8.firebasestorage.app',
+    androidClientId: '400960724338-6gvgvrocthnph1m4k2ksqt653ngebarm.apps.googleusercontent.com',
+    iosClientId: '400960724338-pviickfa1io1ad2rgbronvvembpdkh9j.apps.googleusercontent.com',
     iosBundleId: 'com.example.womenSafety',
   );
 
@@ -73,6 +75,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '400960724338',
     projectId: 'women-safety-sos-d0cd8',
     storageBucket: 'women-safety-sos-d0cd8.firebasestorage.app',
+    androidClientId: '400960724338-6gvgvrocthnph1m4k2ksqt653ngebarm.apps.googleusercontent.com',
+    iosClientId: '400960724338-pviickfa1io1ad2rgbronvvembpdkh9j.apps.googleusercontent.com',
     iosBundleId: 'com.example.womenSafety',
   );
 
@@ -85,4 +89,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'women-safety-sos-d0cd8.firebasestorage.app',
     measurementId: 'G-74X3JS1B2P',
   );
+
 }

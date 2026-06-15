@@ -57,3 +57,7 @@ Use this space to show useful examples of how a project can be used. Additional 
     <td><img src="assets/WhatsApp Image 2026-06-15 at 10.31.16 PM.jpeg" width="250"/></td>
   </tr>
 </table>
+
+Repo link- https://github.com/Harshitvats27/Aegis-Personal-Safety
+
+PPT link -https://1drv.ms/p/c/f21ca099e0a7e3aa/Ef5aLVHi-3FKpH3zWncnOEcBJ6jblFomgTV7-UJsyzlAJw?e=pAtXgA

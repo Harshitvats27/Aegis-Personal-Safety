@@ -7,6 +7,9 @@ Aegis is a Flutter-based personal safety application designed to provide immedia
 ## ✨ Play Store Status
  
 Aegis has successfully completed Google's mandatory 14-day closed testing phase. The final production build is currently **Under Review** on the Google Play Console. It is not yet available for public download but will be live soon!
+
+**Dashboard Proof:**
+<img src="assets/play_console_proof.png" width="600" alt="Play Console Review Status"/>
 ## ✨ Key Features
 
 * **📱 Shake to Trigger SOS**: Simply shake the device to activate the emergency protocol without unlocking the phone.

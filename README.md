@@ -37,8 +37,13 @@ Aegis is a Flutter-based personal safety application designed to provide immedia
 ## Usage
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources
 
-
-
-![WhatsApp Image 2025-09-15 at 22 52 56_8fbf716c](https://github.com/user-attachments/assets/e10342d7-6027-48c8-a455-35864ab085ca)
-
-![WhatsApp Image 2025-09-15 at 23 00 05_39cf8dba](https://github.com/user-attachments/assets/c3db83d0-038f-4eaf-8d16-b4133b3f8e5e)
+<table>
+  <tr>
+    <td><img src="assets/login.png" width="250"/></td>
+    <td><img src="assets/home.png" width="250"/></td>
+  </tr>
+  <tr>
+    <td><img src="assets/sos.png" width="250"/></td>
+    <td><img src="assets/profile.png" width="250"/></td>
+  </tr>
+</table>

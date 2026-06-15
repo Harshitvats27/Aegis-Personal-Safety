@@ -1,7 +1,7 @@
 # 🛡️ Aegis - Personal Women Safety App
 
 Aegis is a Flutter-based personal safety application designed to provide immediate assistance and real-time tracking during emergencies. Built with a focus on women's safety, it enables users to trigger instant SOS alerts, auto-dial emergency numbers, and share live locations with trusted contacts.
-![WhatsApp Image 2025-09-15 at 21 32 57_2fc82fd7](https://github.com/user-attachments/assets/fb0b81b3-4d93-4c44-b4fa-f6cfe4b48ca0)
+![Women Safety Logo](assets/women_safety_logo.png)
 
 ## ✨ Key Features
 
@@ -33,3 +33,12 @@ Aegis is a Flutter-based personal safety application designed to provide immedia
 * Flutter SDK (Latest stable version)
 * Android Studio / VS Code
 * An Android Device or Emulator (Physical device recommended for testing calls, SMS, and Shake sensors).
+
+## Usage
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources
+
+
+
+![WhatsApp Image 2025-09-15 at 22 52 56_8fbf716c](https://github.com/user-attachments/assets/e10342d7-6027-48c8-a455-35864ab085ca)
+
+![WhatsApp Image 2025-09-15 at 23 00 05_39cf8dba](https://github.com/user-attachments/assets/c3db83d0-038f-4eaf-8d16-b4133b3f8e5e)

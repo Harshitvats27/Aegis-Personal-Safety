@@ -4,9 +4,9 @@ Aegis is a Flutter-based personal safety application designed to provide immedia
 ![Women Safety Logo](assets/women_safety_logo.png)
 
 
-## ✨ Play Store Status
+## ✨ Play Store Status 
  
-Aegis has successfully completed Google's mandatory 14-day closed testing phase. The final production build is currently **Under Review** on the Google Play Console. It is not yet available for public download but will be live soon!
+Aegis is now officially available on Play Store and has passed the production access on Google Play on [18 June 2026],
 
 **Dashboard Proof:**
 
@@ -76,3 +76,4 @@ Use this space to show useful examples of how a project can be used. Additional 
 * **Repository:** [Aegis-Personal-Safety](https://github.com/Harshitvats27/Aegis-Personal-Safety)
 * **Presentation:** [Aegis PPT](https://docs.google.com/presentation/d/1wl78EIUMHvHIPkActjb9xu73bAbZq01WQ5i-jE-jXZk/edit?usp=sharing)
 * **Demo Video:**[Aegis Demo](https://drive.google.com/file/d/1dqssIefLwaNCaKAP8X8s28-vxOMNcmoZ/view?usp=drive_link)
+* **Aegis on Paly Store**[Aegis: Personal Safety App](https://play.google.com/store/apps/details?id=com.harshitvats.aegis)

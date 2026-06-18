@@ -6,7 +6,8 @@ Aegis is a Flutter-based personal safety application designed to provide immedia
 
 ## ✨ Play Store Status 
  
-Aegis is now officially available on Play Store and has passed the production access on Google Play on [18 June 2026],
+Aegis is now officially available on Play Store and has passed the production access on Google Play on [18 June 2026].
+[Note: Download option will be available to all users all over the world on google play with in 24 to 48 hours from date [18 June 2026 11:40 PM].
 
 **Dashboard Proof:**
 
